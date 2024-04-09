@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pirapp-ingress-dev
+  namespace: engage
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: "engage.kovaion.ai"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: engage-frontend-service-ai
+            port:
+              number: 80
+  - host: "engage.kovaion.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: engage-frontend-service-ai
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - engage1.kovaion.com
+    secretName: engage2-kovaion-com-tls
